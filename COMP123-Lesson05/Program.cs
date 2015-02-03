@@ -21,15 +21,18 @@ namespace COMP123_Lesson05
             int randomCar;
 
 
-            randomCar = rnd.Next(6);
-            Console.WriteLine("My Random car is {0}", randomCar);
-
-
-
             // Assign cells from one array to another
             for (int index = 0; index < tempCarMakeList.Length; index++)
             {
-                tempCarMakeList[index] = carMakeList[index];
+                
+                randomCar = generateRandomCar(rnd);
+
+                if (carMakeList[randomCar] != "unavailable")
+                {
+                    tempCarMakeList[index] = carMakeList[randomCar];
+
+                    carMakeList[randomCar] = "unavailable";
+                } 
             }
 
 
@@ -46,13 +49,19 @@ namespace COMP123_Lesson05
                 carMakeList[5] = "Jaguar";
                 */
 
+                Console.WriteLine("++++++++++++++++++++++++");
+                Console.WriteLine("+  Original Car  List  +");
+                Console.WriteLine("++++++++++++++++++++++++"); 
+
                 // Output the value of the each cell in each array
                 for (int index = 0; index < carMakeList.Length; index++)
                 {
                     Console.WriteLine(carMakeList[index]);
                 }
 
-                Console.WriteLine("++++++++++++++++++++++++");    
+                Console.WriteLine("++++++++++++++++++++++++");
+                Console.WriteLine("+     New Car  List    +"); 
+                Console.WriteLine("++++++++++++++++++++++++"); 
 
                 for (int index = 0; index < tempCarMakeList.Length; index++)
                 {
@@ -79,6 +88,15 @@ namespace COMP123_Lesson05
             Console.ReadKey();
 
 
+        }
+
+        private static int generateRandomCar(Random rnd)
+        {
+            int randomCar;
+
+            randomCar = rnd.Next(5);
+            Console.WriteLine("My Random car is {0}", randomCar); // Debugging line
+            return randomCar;
         }
     }
 }
